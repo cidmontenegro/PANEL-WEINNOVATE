@@ -1,0 +1,1811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WeInnovate México · Anderson Mosna</title>
+<link href="https://fonts.googleapis.com/css2?family=Graphik:wght@300;400;500;600&family=GT+America+Mono&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* Accenture brand palette */
+    --acn-purple:  #A100FF;
+    --acn-purple2: #7500C0;
+    --acn-black:   #000000;
+    --acn-white:   #FFFFFF;
+    --acn-light:   #F2F2F2;
+    --acn-gray:    #E8E8E8;
+    --acn-mid:     #8C8C8C;
+    --acn-dark:    #333333;
+
+    /* Semantic */
+    --bg:      #FFFFFF;
+    --surface: #F7F7F7;
+    --surface2: #ECECEC;
+    --border:  #DCDCDC;
+    --accent:  #A100FF;
+    --accent2: #7500C0;
+    --warn:    #FF6B00;
+    --danger:  #CC0000;
+    --success: #009B4E;
+    --text:    #000000;
+    --muted:   #6B6B6B;
+    --mono: 'DM Mono', monospace;
+    --sans: 'DM Sans', sans-serif;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    min-height: 100vh;
+    padding: 2rem;
+  }
+
+  /* subtle diagonal texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      linear-gradient(135deg, rgba(161,0,255,0.03) 25%, transparent 25%),
+      linear-gradient(225deg, rgba(161,0,255,0.03) 25%, transparent 25%);
+    background-size: 60px 60px;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ACN TOP BAR */
+  .acn-topbar {
+    background: var(--acn-black);
+    margin: -2rem -2rem 2rem -2rem;
+    padding: 0.7rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    z-index: 10;
+  }
+
+  .acn-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .acn-logo-symbol {
+    width: 32px;
+    height: 32px;
+    background: var(--acn-purple);
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .acn-logo-text {
+    color: white;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+  }
+
+  .acn-topbar-tag {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* HEADER */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 3px solid var(--acn-purple);
+  }
+
+  .header-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .label-tag {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    color: var(--acn-white);
+    text-transform: uppercase;
+    background: var(--acn-purple);
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  h1 {
+    font-family: var(--sans);
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: var(--acn-black);
+    line-height: 1.1;
+  }
+
+  h1 span { color: var(--acn-purple); }
+
+  .header-meta {
+    font-size: 0.82rem;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-top: 0.25rem;
+  }
+
+  .header-right {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+  }
+
+  .date-chip {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--muted);
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    background: var(--surface);
+  }
+
+  /* SUMMARY CARDS */
+  .summary-row {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .stat-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid transparent;
+    padding: 1.2rem 1rem;
+    position: relative;
+    overflow: hidden;
+    animation: fadeUp 0.5s ease both;
+  }
+
+  .stat-card.hc   { border-top-color: var(--acn-purple2); }
+  .stat-card.target  { border-top-color: var(--warn); }
+  .stat-card.submitted { border-top-color: var(--success); }
+  .stat-card.mapeado { border-top-color: var(--acn-purple); }
+  .stat-card.gap  { border-top-color: var(--danger); }
+
+  .stat-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 0.6rem;
+  }
+
+  .stat-value {
+    font-family: var(--mono);
+    font-size: 2.2rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--text);
+  }
+
+  .stat-card.gap .stat-value { color: var(--danger); }
+  .stat-card.submitted .stat-value { color: var(--success); }
+
+  /* MAIN TABLE */
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    animation: fadeUp 0.6s ease 0.1s both;
+  }
+
+  .table-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1.2rem;
+    border-bottom: 1px solid var(--border);
+    background: var(--acn-black);
+  }
+
+  .table-title {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+  }
+
+  .refresh-chip {
+    font-family: var(--mono);
+    font-size: 0.65rem;
+    color: var(--acn-purple);
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+  }
+
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--acn-purple); animation: pulse 2s infinite; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead th {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    padding: 0.7rem 1.2rem;
+    text-align: left;
+    background: var(--acn-gray);
+    border-bottom: 1px solid var(--border);
+    white-space: nowrap;
+  }
+
+  thead th:not(:first-child) { text-align: right; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s;
+  }
+
+  tbody tr:hover { background: rgba(161,0,255,0.03); }
+  tbody tr.total-row { background: var(--acn-black); border-top: 2px solid var(--acn-purple); }
+  tbody tr.total-row td { font-weight: 600; color: white; font-family: var(--mono); }
+  tbody tr.total-row .gap-val { color: #ff7070; }
+
+  td {
+    padding: 0.85rem 1.2rem;
+    font-size: 0.88rem;
+    vertical-align: middle;
+  }
+
+  td:not(:first-child) {
+    text-align: right;
+    font-family: var(--mono);
+    font-size: 0.82rem;
+  }
+
+  .client-cell {
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
+  }
+
+  .client-name {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--acn-black);
+  }
+
+  .client-sub {
+    font-size: 0.7rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    padding: 0.1rem 0.4rem;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  .badge-banking { color: var(--acn-purple2); background: rgba(117,0,192,0.08); border: 1px solid rgba(117,0,192,0.2); }
+  .badge-mex { color: var(--warn); background: rgba(255,107,0,0.08); border: 1px solid rgba(255,107,0,0.25); }
+
+  .gap-val { color: var(--danger); font-weight: 600; }
+
+  /* PROGRESS BAR CELL */
+  .progress-cell {
+    min-width: 140px;
+  }
+
+  .progress-wrap {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    justify-content: flex-end;
+  }
+
+  .progress-bar-bg {
+    width: 80px;
+    height: 5px;
+    background: var(--border);
+    position: relative;
+  }
+
+  .progress-bar-fill {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    background: var(--acn-purple);
+    transition: width 1s ease;
+  }
+
+  .progress-bar-fill.zero {
+    background: var(--danger);
+    width: 2px !important;
+  }
+
+  .progress-pct {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    min-width: 38px;
+    text-align: right;
+    color: var(--muted);
+  }
+
+  /* FOOTER */
+  .footer-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-top: 1.5rem;
+    animation: fadeUp 0.6s ease 0.2s both;
+  }
+
+  .info-block {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--acn-purple);
+    padding: 1.2rem;
+  }
+
+  .info-block-title {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    color: var(--acn-black);
+    margin-bottom: 0.8rem;
+    padding-bottom: 0.6rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .metric-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.3rem 0;
+    font-size: 0.82rem;
+  }
+
+  .metric-label { color: var(--muted); font-size: 0.8rem; }
+  .metric-val { font-family: var(--mono); color: var(--text); font-weight: 500; }
+  .metric-val.green { color: var(--success); }
+  .metric-val.red { color: var(--danger); }
+  .metric-val.yellow { color: var(--warn); }
+
+  /* CHART */
+  .chart-wrap {
+    margin-top: 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--acn-black);
+    padding: 1.4rem;
+    animation: fadeUp 0.6s ease 0.3s both;
+  }
+
+  .chart-title {
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--acn-black);
+    margin-bottom: 1.4rem;
+  }
+
+  .bars {
+    display: flex;
+    gap: 2.5rem;
+    align-items: flex-end;
+    height: 120px;
+    padding-bottom: 1.5rem;
+    border-bottom: 2px solid var(--border);
+  }
+
+  .bar-group {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+    flex: 1;
+  }
+
+  .bar-group-label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--muted);
+    text-align: center;
+    margin-top: 0.4rem;
+  }
+
+  .bars-inner {
+    display: flex;
+    gap: 4px;
+    align-items: flex-end;
+    height: 100px;
+  }
+
+  .bar {
+    width: 22px;
+    border-radius: 1px 1px 0 0;
+    transition: height 1.2s cubic-bezier(.22,.68,0,1.2);
+    position: relative;
+  }
+
+  /* Accenture brand bar colors */
+  .bar-hc     { background: rgba(117,0,192,0.25); border: 1px solid rgba(117,0,192,0.5); }
+  .bar-target { background: rgba(255,107,0,0.35); border: 1px solid rgba(255,107,0,0.6); }
+  .bar-sub    { background: #009B4E; border: 1px solid #007a3d; }
+  .bar-gap    { background: rgba(204,0,0,0.3);  border: 1px solid rgba(204,0,0,0.6); }
+
+  .bar-val {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .legend {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.9rem;
+    flex-wrap: wrap;
+  }
+
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: 0.72rem;
+    color: var(--muted);
+    font-family: var(--mono);
+  }
+
+  .legend-dot {
+    width: 10px; height: 10px;
+    border-radius: 1px;
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="acn-topbar">
+  <div class="acn-logo">
+    <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="32" height="32" fill="#A100FF"/>
+      <text x="50%" y="56%" dominant-baseline="middle" text-anchor="middle" fill="white" font-size="13" font-weight="700" font-family="Arial">></text>
+    </svg>
+    <span class="acn-logo-text">Accenture</span>
+  </div>
+  <span class="acn-topbar-tag">WeInnovate · FY26 · México</span>
+</div>
+
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <span class="label-tag">Operations Account Lead · México</span>
+      <h1>WeInnovate <span>México</span></h1>
+      <span class="header-meta">Anderson Mosna &nbsp;·&nbsp; anderson.mosna@accenture.com</span>
+    </div>
+    <div class="header-right">
+      <div class="date-chip">Atualizado: 14 Mai 2026</div>
+    </div>
+  </div>
+
+  <!-- SUMMARY CARDS -->
+  <div class="summary-row">
+    <div class="stat-card hc" style="animation-delay:0.05s">
+      <div class="stat-label">HC Total</div>
+      <div class="stat-value">404</div>
+    </div>
+    <div class="stat-card target" style="animation-delay:0.1s">
+      <div class="stat-label">Target (25%)</div>
+      <div class="stat-value">101</div>
+    </div>
+    <div class="stat-card submitted" style="animation-delay:0.15s">
+      <div class="stat-label">Submitted</div>
+      <div class="stat-value">1</div>
+    </div>
+    <div class="stat-card mapeado" style="animation-delay:0.2s">
+      <div class="stat-label">Mapeado</div>
+      <div class="stat-value">0</div>
+    </div>
+    <div class="stat-card gap" style="animation-delay:0.25s">
+      <div class="stat-label">GAP</div>
+      <div class="stat-value">100</div>
+    </div>
+  </div>
+
+  <!-- MAIN TABLE -->
+  <div class="table-wrap">
+    <div class="table-header-row">
+      <span class="table-title">Proyectos / Clientes — México</span>
+      <div class="refresh-chip"><div class="dot"></div> ao vivo</div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th style="width:30%">Proyecto / Cliente</th>
+          <th>HC Total</th>
+          <th>Target (25%)</th>
+          <th>Submitted</th>
+          <th>Mapeado</th>
+          <th>GAP</th>
+          <th class="progress-cell">% Progresso</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Santander Nómina -->
+        <tr>
+          <td>
+            <div class="client-cell">
+              <span class="client-name">Santander Nómina</span>
+              <span>
+                <span class="badge badge-banking">Banking</span>&nbsp;
+                <span class="badge badge-mex">México City</span>
+              </span>
+            </div>
+          </td>
+          <td>34</td>
+          <td>9</td>
+          <td style="color:var(--success);font-weight:600">1</td>
+          <td>0</td>
+          <td class="gap-val">8</td>
+          <td>
+            <div class="progress-wrap">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="pb1" style="width:0%"></div>
+              </div>
+              <span class="progress-pct" id="pp1">0.00%</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- BBVA Bancomer -->
+        <tr>
+          <td>
+            <div class="client-cell">
+              <span class="client-name">BBVA Bancomer SA</span>
+              <span>
+                <span class="badge badge-banking">Banking</span>&nbsp;
+                <span class="badge badge-mex">México City</span>
+              </span>
+            </div>
+          </td>
+          <td>37</td>
+          <td>9</td>
+          <td>0</td>
+          <td>0</td>
+          <td class="gap-val">9</td>
+          <td>
+            <div class="progress-wrap">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill zero" id="pb2" style="width:0%"></div>
+              </div>
+              <span class="progress-pct" id="pp2">0.00%</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Whirlpool MEX -->
+        <tr>
+          <td>
+            <div class="client-cell">
+              <span class="client-name">Whirlpool - MEX</span>
+              <span>
+                <span class="badge" style="color:#7500C0;border-color:rgba(117,0,192,0.25);background:rgba(117,0,192,0.06)">Manufacturing</span>&nbsp;
+                <span class="badge badge-mex">México City</span>
+              </span>
+            </div>
+          </td>
+          <td>75</td>
+          <td>19</td>
+          <td>0</td>
+          <td>0</td>
+          <td class="gap-val">19</td>
+          <td>
+            <div class="progress-wrap">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill zero" id="pb3" style="width:0%"></div>
+              </div>
+              <span class="progress-pct" id="pp3">0.00%</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- BAT MEX -->
+        <tr>
+          <td>
+            <div class="client-cell">
+              <span class="client-name">BAT - MEX</span>
+              <span>
+                <span class="badge" style="color:#fb923c;border-color:rgba(251,146,60,0.3);background:rgba(251,146,60,0.05)">Consumer Goods</span>&nbsp;
+                <span class="badge badge-mex">México City</span>
+              </span>
+            </div>
+          </td>
+          <td>228</td>
+          <td>57</td>
+          <td>0</td>
+          <td>0</td>
+          <td class="gap-val">57</td>
+          <td>
+            <div class="progress-wrap">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill zero" id="pb4" style="width:0%"></div>
+              </div>
+              <span class="progress-pct" id="pp4">0.00%</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- Citigroup MEX -->
+        <tr>
+          <td>
+            <div class="client-cell">
+              <span class="client-name">Citibanamex</span>
+              <span>
+                <span class="badge badge-banking">Banking</span>&nbsp;
+                <span class="badge badge-mex">México City</span>
+              </span>
+            </div>
+          </td>
+          <td>30</td>
+          <td>8</td>
+          <td>0</td>
+          <td>0</td>
+          <td class="gap-val">8</td>
+          <td>
+            <div class="progress-wrap">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill zero" id="pb5" style="width:0%"></div>
+              </div>
+              <span class="progress-pct" id="pp5">0.00%</span>
+            </div>
+          </td>
+        </tr>
+
+        <!-- TOTAL -->
+        <tr class="total-row">
+          <td style="font-family:var(--mono);font-size:0.75rem;letter-spacing:0.05em;text-transform:uppercase;">TOTAL</td>
+          <td>404</td>
+          <td>101</td>
+          <td style="color:#4ade80;font-weight:600">1</td>
+          <td>0</td>
+          <td class="gap-val">100</td>
+          <td>
+            <div class="progress-wrap">
+              <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="pb6" style="width:0%"></div>
+              </div>
+              <span class="progress-pct" id="pp6">0.00%</span>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- FOOTER INFO -->
+  <div class="footer-row" style="grid-template-columns:repeat(3,1fr)">
+    <div class="info-block">
+      <div class="info-block-title">Santander Nómina</div>
+      <div class="metric-row"><span class="metric-label">HC Total</span><span class="metric-val">34</span></div>
+      <div class="metric-row"><span class="metric-label">Target (25%)</span><span class="metric-val yellow">9</span></div>
+      <div class="metric-row"><span class="metric-label">Submitted</span><span class="metric-val green">1</span></div>
+      <div class="metric-row"><span class="metric-label">Mapeado</span><span class="metric-val">0</span></div>
+      <div class="metric-row"><span class="metric-label">GAP</span><span class="metric-val red">8</span></div>
+      <div class="metric-row"><span class="metric-label">Progresso</span><span class="metric-val green">2.94%</span></div>
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">BBVA Bancomer SA</div>
+      <div class="metric-row"><span class="metric-label">HC Total</span><span class="metric-val">37</span></div>
+      <div class="metric-row"><span class="metric-label">Target (25%)</span><span class="metric-val yellow">9</span></div>
+      <div class="metric-row"><span class="metric-label">Submitted</span><span class="metric-val red">0</span></div>
+      <div class="metric-row"><span class="metric-label">Mapeado</span><span class="metric-val">0</span></div>
+      <div class="metric-row"><span class="metric-label">GAP</span><span class="metric-val red">9</span></div>
+      <div class="metric-row"><span class="metric-label">Progresso</span><span class="metric-val red">0.00%</span></div>
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">Whirlpool - MEX</div>
+      <div class="metric-row"><span class="metric-label">HC Total</span><span class="metric-val">75</span></div>
+      <div class="metric-row"><span class="metric-label">Target (25%)</span><span class="metric-val yellow">19</span></div>
+      <div class="metric-row"><span class="metric-label">Submitted</span><span class="metric-val red">0</span></div>
+      <div class="metric-row"><span class="metric-label">Mapeado</span><span class="metric-val">0</span></div>
+      <div class="metric-row"><span class="metric-label">GAP</span><span class="metric-val red">19</span></div>
+      <div class="metric-row"><span class="metric-label">Progresso</span><span class="metric-val red">0.00%</span></div>
+    </div>
+  </div>
+
+  <div class="footer-row" style="grid-template-columns:1fr 1fr;margin-top:1rem">
+    <div class="info-block">
+      <div class="info-block-title">BAT - MEX</div>
+      <div class="metric-row"><span class="metric-label">HC Total</span><span class="metric-val">228</span></div>
+      <div class="metric-row"><span class="metric-label">Target (25%)</span><span class="metric-val yellow">57</span></div>
+      <div class="metric-row"><span class="metric-label">Submitted</span><span class="metric-val red">0</span></div>
+      <div class="metric-row"><span class="metric-label">Mapeado</span><span class="metric-val">0</span></div>
+      <div class="metric-row"><span class="metric-label">GAP</span><span class="metric-val red">57</span></div>
+      <div class="metric-row"><span class="metric-label">Progresso</span><span class="metric-val red">0.00%</span></div>
+    </div>
+    <div class="info-block">
+      <div class="info-block-title">Citibanamex</div>
+      <div class="metric-row"><span class="metric-label">HC Total</span><span class="metric-val">30</span></div>
+      <div class="metric-row"><span class="metric-label">Target (25%)</span><span class="metric-val yellow">8</span></div>
+      <div class="metric-row"><span class="metric-label">Submitted</span><span class="metric-val red">0</span></div>
+      <div class="metric-row"><span class="metric-label">Mapeado</span><span class="metric-val">0</span></div>
+      <div class="metric-row"><span class="metric-label">GAP</span><span class="metric-val red">8</span></div>
+      <div class="metric-row"><span class="metric-label">Progresso</span><span class="metric-val red">0.00%</span></div>
+    </div>
+  </div>
+
+  <!-- BAR CHART -->
+  <div class="chart-wrap">
+    <div class="chart-title">Comparativo: HC × Target × Submitted × GAP</div>
+    <div class="bars" style="gap:1.2rem">
+
+      <div class="bar-group">
+        <div class="bars-inner">
+          <div class="bar bar-hc" id="b1-hc"><span class="bar-val">34</span></div>
+          <div class="bar bar-target" id="b1-target"><span class="bar-val">9</span></div>
+          <div class="bar bar-sub" id="b1-sub"><span class="bar-val">1</span></div>
+          <div class="bar bar-gap" id="b1-gap"><span class="bar-val">8</span></div>
+        </div>
+        <div class="bar-group-label">Santander<br>Nómina</div>
+      </div>
+
+      <div class="bar-group">
+        <div class="bars-inner">
+          <div class="bar bar-hc" id="b2-hc"><span class="bar-val">37</span></div>
+          <div class="bar bar-target" id="b2-target"><span class="bar-val">9</span></div>
+          <div class="bar bar-sub" id="b2-sub" style="height:1px"><span class="bar-val">0</span></div>
+          <div class="bar bar-gap" id="b2-gap"><span class="bar-val">9</span></div>
+        </div>
+        <div class="bar-group-label">BBVA<br>Bancomer</div>
+      </div>
+
+      <div class="bar-group">
+        <div class="bars-inner">
+          <div class="bar bar-hc" id="b3-hc"><span class="bar-val">75</span></div>
+          <div class="bar bar-target" id="b3-target"><span class="bar-val">19</span></div>
+          <div class="bar bar-sub" id="b3-sub" style="height:1px"><span class="bar-val">0</span></div>
+          <div class="bar bar-gap" id="b3-gap"><span class="bar-val">19</span></div>
+        </div>
+        <div class="bar-group-label">Whirlpool<br>MEX</div>
+      </div>
+
+      <div class="bar-group">
+        <div class="bars-inner">
+          <div class="bar bar-hc" id="b4-hc"><span class="bar-val">228</span></div>
+          <div class="bar bar-target" id="b4-target"><span class="bar-val">57</span></div>
+          <div class="bar bar-sub" id="b4-sub" style="height:1px"><span class="bar-val">0</span></div>
+          <div class="bar bar-gap" id="b4-gap"><span class="bar-val">57</span></div>
+        </div>
+        <div class="bar-group-label">BAT<br>MEX</div>
+      </div>
+
+      <div class="bar-group">
+        <div class="bars-inner">
+          <div class="bar bar-hc" id="b5-hc"><span class="bar-val">30</span></div>
+          <div class="bar bar-target" id="b5-target"><span class="bar-val">8</span></div>
+          <div class="bar bar-sub" id="b5-sub" style="height:1px"><span class="bar-val">0</span></div>
+          <div class="bar bar-gap" id="b5-gap"><span class="bar-val">8</span></div>
+        </div>
+        <div class="bar-group-label">Citi<br>banamex</div>
+      </div>
+
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(117,0,192,0.5)"></div>HC Total</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(255,107,0,0.7)"></div>Target (25%)</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#009B4E"></div>Submitted</div>
+      <div class="legend-item"><div class="legend-dot" style="background:rgba(204,0,0,0.6)"></div>GAP</div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       ACESSO RÁPIDO
+  ═══════════════════════════════════════════════ -->
+  <div class="quick-access">
+    <div class="qa-label">Acesso Rápido</div>
+    <div class="qa-links">
+
+      <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="qa-btn qa-btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg>
+        Acessar Portal WeInnovate
+      </a>
+
+      <a href="https://cidmontenegro.github.io/weinnovate_guia_trilingual/" target="_blank" class="qa-btn qa-btn-secondary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14,2 14,8 20,8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+        Guia de Preenchimento
+      </a>
+
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       OPORTUNIDADES WEINNOVATE — DIGIPORTAL
+  ═══════════════════════════════════════════════ -->
+
+  <div class="opp-section">
+    <div class="opp-section-header">
+      <div class="opp-section-header-left">
+        <div class="opp-section-tag">Fonte: DigiPortal</div>
+        <div class="opp-section-title">Oportunidades para WeInnovate</div>
+        <div class="opp-section-sub">Projetos ativos no DigiPortal sem ideia WeInnovate registrada — candidatos prioritários para submissão</div>
+      </div>
+      <div class="opp-stats">
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--danger)">4</span><span class="opp-stat-label">Alta Prioridade</span></div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--warn)">8</span><span class="opp-stat-label">Média Prioridade</span></div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--acn-purple)">12</span><span class="opp-stat-label">Total Oport.</span></div>
+      </div>
+    </div>
+
+    <!-- FILTER PILLS -->
+    <div class="filter-row">
+      <button class="fpill active" onclick="filterOpps('all',this)">Todos (12)</button>
+      <button class="fpill" onclick="filterOpps('alta',this)">🔴 Alta Prioridade (4)</button>
+      <button class="fpill" onclick="filterOpps('media',this)">🟡 Média Prioridade (8)</button>
+      <button class="fpill" onclick="filterOpps('genai',this)">Gen AI / IA</button>
+      <button class="fpill" onclick="filterOpps('pipeline',this)">Pipeline</button>
+    </div>
+
+    <!-- OPPORTUNITY TABLE -->
+    <div class="opp-grid" id="oppGrid">
+
+      <div class="opp-table-head">
+        <div class="opp-th"></div>
+        <div class="opp-th">Cliente</div>
+        <div class="opp-th">Proyecto / Iniciativa</div>
+        <div class="opp-th">Tipo</div>
+        <div class="opp-th" style="text-align:right;padding-right:0.5rem">FTE</div>
+        <div class="opp-th">Stage</div>
+        <div class="opp-th">Prioridad</div>
+        <div class="opp-th"></div>
+      </div>
+
+      <div class="opp-group-sep"><span class="opp-group-label">🔴 Alta Prioridad — 4 proyectos</span></div>
+
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
+        <div class="opp-dot dot-alta"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">Chatbot consulta estatus nómina digital<small>Core Banking · VBA / PL-SQL / Telegram</small></div>
+        <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
+        <div class="opp-fte-val">22.5</div>
+        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-priority-tag tag-alta">🔴 Alta</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
+        <div class="opp-dot dot-alta"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">GenAI — Nomina MX Cost Avoidance<small>Core Banking · Combination (GenAI) · 35 usuários</small></div>
+        <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
+        <div class="opp-fte-val">6.0</div>
+        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-priority-tag tag-alta">🔴 Alta</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
+        <div class="opp-dot dot-alta"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">Pipeline FY26 — Santander MX Q1 Agentic<small>Core Banking · Agentic AI</small></div>
+        <div><span class="opp-type-chip chip-agentic">Agentic AI</span></div>
+        <div class="opp-fte-val">3.0</div>
+        <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
+        <div class="opp-priority-tag tag-alta">🔴 Alta</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
+        <div class="opp-dot dot-alta"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">GenAI — Nomina MX Saving<small>Core Banking · Combination (GenAI) · 35 usuários</small></div>
+        <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
+        <div class="opp-fte-val">2.0</div>
+        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-priority-tag tag-alta">🔴 Alta</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-group-sep"><span class="opp-group-label">🟡 Média Prioridad — 8 proyectos</span></div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="automation">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">Projetos Santander Mexico Q4<small>Core Banking · Automation</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
+        <div class="opp-fte-val">4.0</div>
+        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">Pipeline FY26 — Santander Q2 Capacity Utilization<small>Core Banking · Combination</small></div>
+        <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
+        <div class="opp-fte-val">1.0</div>
+        <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="automation">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-bbva">BBVA</div>
+        <div class="opp-tool-name">BBVA — Project Mar26<small>Core Banking · Capacity Utilization</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
+        <div class="opp-fte-val">3.0</div>
+        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="automation">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-bbva">BBVA</div>
+        <div class="opp-tool-name">BBVA — Project 26<small>Core Banking · Capacity Utilization</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
+        <div class="opp-fte-val">3.0</div>
+        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
+        <div class="opp-tool-name">Pipeline FY26 — Whirlpool Q3 RPA<small>Invoice to Pay (AP) · Selenium / RPA</small></div>
+        <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
+        <div class="opp-fte-val">1.0</div>
+        <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="automation">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">Cálculo de bonos y comisiones<small>Core Banking · VBA / PL-SQL</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
+        <div class="opp-fte-val">2.0</div>
+        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
+        <div class="opp-tool-name">Payment Complement — Accounts Payable<small>Invoice to Pay · Automation Anywhere</small></div>
+        <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
+        <div class="opp-fte-val">0.1</div>
+        <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
+        <div class="opp-tool-name">Reconciliation of Bank Statements<small>Record to Report · Combination / VBA / Python</small></div>
+        <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
+        <div class="opp-fte-val">0.1</div>
+        <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+
+    </div><!-- /opp-grid -->
+  </div><!-- /opp-section -->
+
+</div><!-- /container -->
+
+<style>
+  /* QUICK ACCESS BAR */
+  .quick-access {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    background: var(--acn-black);
+    padding: 1rem 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    animation: fadeUp 0.6s ease 0.35s both;
+  }
+
+  .qa-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .qa-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .qa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: all 0.15s;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .qa-btn-primary {
+    background: var(--acn-purple);
+    color: white;
+  }
+  .qa-btn-primary:hover { background: var(--acn-purple2); }
+
+  .qa-btn-secondary {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .qa-btn-secondary:hover { border-color: var(--acn-purple); color: white; }
+
+  .qa-btn-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.72rem;
+  }
+  .qa-btn-ghost:hover { color: rgba(255,255,255,0.8); }
+
+  .qa-soon {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.5);
+    padding: 0.1rem 0.35rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* SUBMIT BUTTON ON CARDS */
+  .opp-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    background: var(--acn-purple);
+    color: white;
+    text-decoration: none;
+    margin-top: 0.25rem;
+    align-self: flex-start;
+    transition: background 0.15s;
+    border: none;
+    cursor: pointer;
+  }
+  .opp-submit-btn:hover { background: var(--acn-purple2); }
+  .opp-submit-btn svg { flex-shrink: 0; }
+
+  /* OPPORTUNITIES SECTION */
+  .opp-section {
+    margin-top: 2rem;
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+
+  .opp-section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: var(--acn-black);
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .opp-section-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.35rem;
+  }
+
+  .opp-section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+  }
+
+  .opp-section-sub {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.3rem;
+    max-width: 560px;
+  }
+
+  .opp-stats {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .opp-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  .opp-stat-num {
+    font-family: var(--mono);
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .opp-stat-label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  /* FILTER PILLS */
+  .filter-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .fpill {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+
+  .fpill:hover { border-color: var(--acn-purple); color: var(--acn-purple); }
+  .fpill.active { background: var(--acn-purple); color: white; border-color: var(--acn-purple); }
+
+  /* OPPORTUNITY GRID */
+  .opp-grid {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+  .opp-table-head {
+    display: grid;
+    grid-template-columns: 14px 88px 1fr 90px 55px 100px 80px 120px;
+    background: var(--acn-black);
+    padding: 0.5rem 0.8rem;
+    align-items: center;
+    gap: 0.4rem;
+  }
+  .opp-th {
+    font-family: var(--mono);
+    font-size: 0.52rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .opp-group-sep {
+    background: var(--surface);
+    padding: 0.32rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    border-top: 1px solid var(--border);
+  }
+  .opp-group-label {
+    font-family: var(--mono);
+    font-size: 0.57rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  .opp-card {
+    display: grid;
+    grid-template-columns: 14px 88px 1fr 90px 55px 100px 80px 120px;
+    gap: 0.4rem;
+    align-items: center;
+    padding: 0.55rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    background: white;
+    transition: background 0.12s;
+  }
+  .opp-card:last-child { border-bottom: none; }
+  .opp-card:hover { background: rgba(161,0,255,0.025); }
+  .opp-card.priority-alta { border-left: 3px solid var(--danger); }
+  .opp-card.priority-media { border-left: 3px solid var(--warn); }
+  .opp-card.hidden { display: none; }
+  .opp-dot {
+    width: 7px; height: 7px;
+    border-radius: 50%;
+    margin: 0 auto;
+    flex-shrink: 0;
+  }
+  .dot-alta  { background: var(--danger); }
+  .dot-media { background: var(--warn); }
+  .opp-client-badge {
+    font-family: var(--mono);
+    font-size: 0.56rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    padding: 0.12rem 0.35rem;
+    text-align: center;
+    white-space: nowrap;
+  }
+  .client-santander { background: #CC0000; color: white; }
+  .client-bbva      { background: #004B9B; color: white; }
+  .client-whirlpool { background: #1B3A6B; color: white; }
+  .client-citi      { background: #003087; color: white; }
+  .opp-tool-name {
+    font-size: 0.78rem;
+    font-weight: 600;
+    color: var(--acn-black);
+    line-height: 1.25;
+    overflow: hidden;
+  }
+  .opp-tool-name small {
+    display: block;
+    font-size: 0.6rem;
+    font-weight: 400;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-top: 0.08rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .opp-type-chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.56rem;
+    padding: 0.1rem 0.35rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .chip-genai    { background: rgba(161,0,255,0.1); color: var(--acn-purple2); border: 1px solid rgba(161,0,255,0.25); }
+  .chip-agentic  { background: rgba(0,90,156,0.1);  color: #005a9c;            border: 1px solid rgba(0,90,156,0.3); }
+  .chip-auto     { background: rgba(255,107,0,0.08); color: var(--warn);       border: 1px solid rgba(255,107,0,0.25); }
+  .chip-pipeline { background: rgba(0,155,78,0.08); color: var(--success);    border: 1px solid rgba(0,155,78,0.25); }
+  .opp-fte-val {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--acn-purple);
+    text-align: right;
+    padding-right: 0.3rem;
+  }
+  .opp-stage {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .stage-deployed { color: var(--success); font-weight: 600; }
+  .stage-pipeline { color: #005a9c; font-weight: 600; }
+  .opp-priority-tag {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-alta  { color: var(--danger); }
+  .tag-media { color: var(--warn); }
+  .opp-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--sans);
+    font-size: 0.65rem;
+    font-weight: 600;
+    padding: 0.28rem 0.6rem;
+    background: var(--acn-purple);
+    color: white;
+    text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .opp-submit-btn:hover { background: var(--acn-purple2); }
+  .opp-submit-btn svg { flex-shrink: 0; }
+
+
+  /* QUICK ACCESS BAR */
+  .quick-access {
+    margin-top: 1.5rem;
+    margin-bottom: 0;
+    background: var(--acn-black);
+    padding: 1rem 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    animation: fadeUp 0.6s ease 0.35s both;
+  }
+
+  .qa-label {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+
+  .qa-links {
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
+  .qa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-family: var(--sans);
+    font-size: 0.78rem;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    transition: all 0.15s;
+    white-space: nowrap;
+    position: relative;
+  }
+
+  .qa-btn-primary {
+    background: var(--acn-purple);
+    color: white;
+  }
+  .qa-btn-primary:hover { background: var(--acn-purple2); }
+
+  .qa-btn-secondary {
+    background: transparent;
+    color: rgba(255,255,255,0.7);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .qa-btn-secondary:hover { border-color: var(--acn-purple); color: white; }
+
+  .qa-btn-ghost {
+    background: transparent;
+    color: rgba(255,255,255,0.45);
+    font-size: 0.72rem;
+  }
+  .qa-btn-ghost:hover { color: rgba(255,255,255,0.8); }
+
+  .qa-soon {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    background: rgba(255,255,255,0.15);
+    color: rgba(255,255,255,0.5);
+    padding: 0.1rem 0.35rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+
+  /* SUBMIT BUTTON ON CARDS */
+  .opp-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.4rem 0.9rem;
+    background: var(--acn-purple);
+    color: white;
+    text-decoration: none;
+    margin-top: 0.25rem;
+    align-self: flex-start;
+    transition: background 0.15s;
+    border: none;
+    cursor: pointer;
+  }
+  .opp-submit-btn:hover { background: var(--acn-purple2); }
+  .opp-submit-btn svg { flex-shrink: 0; }
+
+  /* OPPORTUNITIES SECTION */
+  .opp-section {
+    margin-top: 2rem;
+    animation: fadeUp 0.6s ease 0.4s both;
+  }
+
+  .opp-section-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    background: var(--acn-black);
+    padding: 1.4rem 1.6rem;
+    margin-bottom: 1rem;
+    gap: 1rem;
+  }
+
+  .opp-section-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+    margin-bottom: 0.35rem;
+  }
+
+  .opp-section-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: white;
+    line-height: 1.1;
+  }
+
+  .opp-section-sub {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.3rem;
+    max-width: 560px;
+  }
+
+  .opp-stats {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .opp-stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.15rem;
+  }
+
+  .opp-stat-num {
+    font-family: var(--mono);
+    font-size: 1.8rem;
+    font-weight: 700;
+    line-height: 1;
+  }
+
+  .opp-stat-label {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    text-align: center;
+  }
+
+  /* FILTER PILLS */
+  .filter-row {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .fpill {
+    font-family: var(--mono);
+    font-size: 0.68rem;
+    padding: 0.3rem 0.8rem;
+    border: 1px solid var(--border);
+    background: white;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.03em;
+  }
+
+  .fpill:hover { border-color: var(--acn-purple); color: var(--acn-purple); }
+  .fpill.active { background: var(--acn-purple); color: white; border-color: var(--acn-purple); }
+
+  /* OPPORTUNITY GRID */
+  .opp-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 1px solid var(--border);
+    overflow: hidden;
+  }
+
+  /* TABLE HEADER */
+  .opp-table-head {
+    display: grid;
+    grid-template-columns: 24px 90px 1fr 100px 80px 70px 90px 140px;
+    gap: 0;
+    background: var(--acn-black);
+    padding: 0.45rem 0.8rem;
+    align-items: center;
+  }
+
+  .opp-th {
+    font-family: var(--mono);
+    font-size: 0.55rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+    padding: 0 0.4rem;
+  }
+
+  /* ROW */
+  .opp-card {
+    display: grid;
+    grid-template-columns: 24px 90px 1fr 100px 80px 70px 90px 140px;
+    gap: 0;
+    align-items: center;
+    padding: 0.6rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    background: white;
+    transition: background 0.12s;
+    cursor: default;
+  }
+
+  .opp-card:last-child { border-bottom: none; }
+  .opp-card:hover { background: rgba(161,0,255,0.03); }
+  .opp-card.priority-alta { border-left: 3px solid var(--danger); }
+  .opp-card.priority-media { border-left: 3px solid var(--warn); }
+  .opp-card.hidden { display: none; }
+
+  /* PRIORITY DOT */
+  .opp-dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+    margin: 0 auto;
+  }
+  .dot-alta  { background: var(--danger); }
+  .dot-media { background: var(--warn); }
+
+  /* CLIENT BADGE */
+  .opp-client-badge {
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.15rem 0.4rem;
+    text-align: center;
+  }
+  .client-santander { background: #CC0000; color: white; }
+  .client-bbva      { background: #004B9B; color: white; }
+  .client-whirlpool { background: #003087; color: white; }
+  .client-citi      { background: #003087; color: white; }
+
+  /* TOOL NAME CELL */
+  .opp-tool-name {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--acn-black);
+    line-height: 1.3;
+    padding: 0 0.6rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .opp-tool-name small {
+    display: block;
+    font-size: 0.62rem;
+    font-weight: 400;
+    color: var(--muted);
+    font-family: var(--mono);
+    margin-top: 0.1rem;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  /* TYPE CHIP — compact */
+  .opp-type-chip {
+    display: inline-block;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    padding: 0.1rem 0.4rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    white-space: nowrap;
+  }
+  .chip-genai    { background: rgba(161,0,255,0.1); color: var(--acn-purple2); border: 1px solid rgba(161,0,255,0.25); }
+  .chip-agentic  { background: rgba(0,90,156,0.1);  color: #005a9c;            border: 1px solid rgba(0,90,156,0.3); }
+  .chip-auto     { background: rgba(255,107,0,0.08); color: var(--warn);       border: 1px solid rgba(255,107,0,0.25); }
+  .chip-pipeline { background: rgba(0,155,78,0.08); color: var(--success);    border: 1px solid rgba(0,155,78,0.25); }
+
+  /* FTE */
+  .opp-fte-val {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--acn-purple);
+    text-align: right;
+    padding-right: 0.5rem;
+  }
+
+  /* STAGE */
+  .opp-stage {
+    font-family: var(--mono);
+    font-size: 0.62rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+  .stage-deployed { color: var(--success); }
+  .stage-pipeline { color: #005a9c; }
+
+  /* PRIORITY TAG */
+  .opp-priority-tag {
+    font-family: var(--mono);
+    font-size: 0.6rem;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .tag-alta  { color: var(--danger); }
+  .tag-media { color: var(--warn); }
+
+  /* SUBMIT BTN — compact */
+  .opp-submit-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 600;
+    padding: 0.3rem 0.7rem;
+    background: var(--acn-purple);
+    color: white;
+    text-decoration: none;
+    transition: background 0.15s;
+    white-space: nowrap;
+  }
+  .opp-submit-btn:hover { background: var(--acn-purple2); }
+  .opp-submit-btn svg { flex-shrink: 0; }
+
+  /* GROUP SEPARATOR */
+  .opp-group-sep {
+    display: grid;
+    grid-template-columns: 24px 90px 1fr 100px 80px 70px 90px 140px;
+    background: var(--surface);
+    padding: 0.35rem 0.8rem;
+    border-bottom: 1px solid var(--border);
+    align-items: center;
+  }
+  .opp-group-label {
+    grid-column: 1 / -1;
+    font-family: var(--mono);
+    font-size: 0.58rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--muted);
+    font-weight: 600;
+  }
+</style>
+
+<script>
+  const barHeight = 95;
+  const refVal = 228;
+
+  const progressData = [
+    { pbId: 'pb1', ppId: 'pp1', pct: 1/34 },
+    { pbId: 'pb2', ppId: 'pp2', pct: 0 },
+    { pbId: 'pb3', ppId: 'pp3', pct: 0 },
+    { pbId: 'pb4', ppId: 'pp4', pct: 0 },
+    { pbId: 'pb5', ppId: 'pp5', pct: 0 },
+    { pbId: 'pb6', ppId: 'pp6', pct: 1/404 },
+  ];
+
+  const barData = {
+    'b1-hc': 34,  'b1-target': 9,  'b1-sub': 1,  'b1-gap': 8,
+    'b2-hc': 37,  'b2-target': 9,  'b2-sub': 0,  'b2-gap': 9,
+    'b3-hc': 75,  'b3-target': 19, 'b3-sub': 0,  'b3-gap': 19,
+    'b4-hc': 228, 'b4-target': 57, 'b4-sub': 0,  'b4-gap': 57,
+    'b5-hc': 30,  'b5-target': 8,  'b5-sub': 0,  'b5-gap': 8,
+  };
+
+  setTimeout(() => {
+    progressData.forEach(({ pbId, ppId, pct }) => {
+      const fill = document.getElementById(pbId);
+      const label = document.getElementById(ppId);
+      if (!fill || !label) return;
+      if (pct === 0) { fill.style.width = '2px'; fill.classList.add('zero'); }
+      else { fill.classList.remove('zero'); fill.style.width = Math.min(pct * 100, 100) + '%'; }
+      label.textContent = (pct * 100).toFixed(2) + '%';
+    });
+    Object.entries(barData).forEach(([id, val]) => {
+      const el = document.getElementById(id);
+      if (!el) return;
+      el.style.height = (val === 0 ? 2 : Math.max(3, (val / refVal) * barHeight)) + 'px';
+    });
+  }, 300);
+
+  function filterOpps(type, btn) {
+    document.querySelectorAll('.fpill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.opp-card').forEach(card => {
+      const pri  = card.dataset.priority;
+      const ctype = card.dataset.type;
+      let show = true;
+      if (type === 'alta') show = pri === 'alta';
+      else if (type === 'media') show = pri === 'media';
+      else if (type === 'genai') show = ctype === 'genai';
+      else if (type === 'pipeline') show = ctype === 'pipeline';
+      card.classList.toggle('hidden', !show);
+    });
+  }
+</script>
+
+</body>
+</html>
