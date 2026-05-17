@@ -888,23 +888,37 @@
         <div class="opp-section-sub">Projetos ativos no DigiPortal sem ideia WeInnovate registrada — candidatos prioritários para submissão</div>
       </div>
       <div class="opp-stats">
-        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--danger)">4</span><span class="opp-stat-label">Alta Prioridade</span></div>
-        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--warn)">8</span><span class="opp-stat-label">Média Prioridade</span></div>
-        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--acn-purple)">12</span><span class="opp-stat-label">Total Oport.</span></div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--danger)">3</span><span class="opp-stat-label">Alta Confirmados</span></div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:#f59e0b">3</span><span class="opp-stat-label">A Verificar</span></div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--warn)">9</span><span class="opp-stat-label">Média Confirmados</span></div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--acn-purple)">15</span><span class="opp-stat-label">Total Mapeados</span></div>
+      </div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--warn)">9</span><span class="opp-stat-label">Média Prioridad</span></div>
+        <div class="opp-stat-item"><span class="opp-stat-num" style="color:var(--acn-purple)">11+2</span><span class="opp-stat-label">Confirmados + Verificar</span></div>
       </div>
     </div>
 
     <!-- FILTER PILLS -->
     <div class="filter-row">
-      <button class="fpill active" onclick="filterOpps('all',this)">Todos (12)</button>
-      <button class="fpill" onclick="filterOpps('alta',this)">🔴 Alta Prioridade (4)</button>
-      <button class="fpill" onclick="filterOpps('media',this)">🟡 Média Prioridade (8)</button>
+      <button class="fpill active" onclick="filterOpps('all',this)">Todos (13)</button>
+      <button class="fpill" onclick="filterOpps('alta',this)">🔴 Alta Prioridad (3)</button>
+      <button class="fpill" onclick="filterOpps('media',this)">🟡 Média Prioridad (9)</button>
       <button class="fpill" onclick="filterOpps('genai',this)">Gen AI / IA</button>
       <button class="fpill" onclick="filterOpps('pipeline',this)">Pipeline</button>
     </div>
 
     <!-- OPPORTUNITY TABLE -->
     <div class="opp-grid" id="oppGrid">
+
+      <div style="display:flex;gap:0.4rem;padding:0.6rem 0.8rem;background:var(--acn-gray);border-bottom:1px solid var(--border);flex-wrap:wrap;align-items:center">
+        <span style="font-family:var(--mono);font-size:0.55rem;color:var(--muted);letter-spacing:0.08em;text-transform:uppercase;margin-right:0.4rem">Filtrar:</span>
+        <button class="fpill active" onclick="filterOpps('all',this)">Todos</button>
+        <button class="fpill" onclick="filterClient('santander',this)">🔴 Santander</button>
+        <button class="fpill" onclick="filterClient('bbva',this)">🔵 BBVA</button>
+        <button class="fpill" onclick="filterClient('whirlpool',this)">⚙️ Whirlpool</button>
+        <button class="fpill" onclick="filterOpps('alta',this)">🔴 Alta Prioridad</button>
+        <button class="fpill" onclick="filterOpps('media',this)">🟡 Média Prioridad</button>
+      </div>
 
       <div class="opp-table-head">
         <div class="opp-th"></div>
@@ -917,31 +931,19 @@
         <div class="opp-th"></div>
       </div>
 
-      <div class="opp-group-sep"><span class="opp-group-label">🔴 Alta Prioridad — 4 proyectos</span></div>
+      <div class="opp-group-sep"><span class="opp-group-label" style="color:var(--muted)">🔴 Santander Nómina — 3 confirmados FY26 · 2 a verificar</span></div>
 
-      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai" data-client="santander">
         <div class="opp-dot dot-alta"></div>
         <div class="opp-client-badge client-santander">SANTANDER</div>
-        <div class="opp-tool-name">Chatbot consulta estatus nómina digital<small>Core Banking · VBA / PL-SQL / Telegram</small></div>
-        <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
-        <div class="opp-fte-val">22.5</div>
-        <div class="opp-stage stage-deployed">✅ Deployed</div>
-        <div class="opp-priority-tag tag-alta">🔴 Alta</div>
-        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
-      </div>
-
-      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
-        <div class="opp-dot dot-alta"></div>
-        <div class="opp-client-badge client-santander">SANTANDER</div>
-        <div class="opp-tool-name">GenAI — Nomina MX Cost Avoidance<small>Core Banking · Combination (GenAI) · 35 usuários</small></div>
+        <div class="opp-tool-name">GenAI Jan26 — Nomina MX Cost Avoidance<small>Core Banking · Combination GenAI · 35 users · Stage3: Mar/26</small></div>
         <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
         <div class="opp-fte-val">6.0</div>
-        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-stage stage-deployed">✅ Mar/26</div>
         <div class="opp-priority-tag tag-alta">🔴 Alta</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
-
-      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai" data-client="santander">
         <div class="opp-dot dot-alta"></div>
         <div class="opp-client-badge client-santander">SANTANDER</div>
         <div class="opp-tool-name">Pipeline FY26 — Santander MX Q1 Agentic<small>Core Banking · Agentic AI</small></div>
@@ -951,108 +953,144 @@
         <div class="opp-priority-tag tag-alta">🔴 Alta</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
-
-      <div class="opp-card priority-alta" data-priority="alta" data-type="genai">
+      <div class="opp-card priority-alta" data-priority="alta" data-type="pipeline" data-client="santander">
         <div class="opp-dot dot-alta"></div>
-        <div class="opp-client-badge client-santander">SANTANDER</div>
-        <div class="opp-tool-name">GenAI — Nomina MX Saving<small>Core Banking · Combination (GenAI) · 35 usuários</small></div>
-        <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
-        <div class="opp-fte-val">2.0</div>
-        <div class="opp-stage stage-deployed">✅ Deployed</div>
-        <div class="opp-priority-tag tag-alta">🔴 Alta</div>
-        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
-      </div>
-
-      <div class="opp-group-sep"><span class="opp-group-label">🟡 Média Prioridad — 8 proyectos</span></div>
-
-      <div class="opp-card priority-media" data-priority="media" data-type="automation">
-        <div class="opp-dot dot-media"></div>
-        <div class="opp-client-badge client-santander">SANTANDER</div>
-        <div class="opp-tool-name">Projetos Santander Mexico Q4<small>Core Banking · Automation</small></div>
-        <div><span class="opp-type-chip chip-auto">Automation</span></div>
-        <div class="opp-fte-val">4.0</div>
-        <div class="opp-stage stage-deployed">✅ Deployed</div>
-        <div class="opp-priority-tag tag-media">🟡 Média</div>
-        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
-      </div>
-
-      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
-        <div class="opp-dot dot-media"></div>
         <div class="opp-client-badge client-santander">SANTANDER</div>
         <div class="opp-tool-name">Pipeline FY26 — Santander Q2 Capacity Utilization<small>Core Banking · Combination</small></div>
         <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
         <div class="opp-fte-val">1.0</div>
         <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
-        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <div class="opp-priority-tag tag-alta">🔴 Alta</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai" data-client="santander" style="background:#fffbeb;border-left:3px solid #f59e0b">
+        <div class="opp-dot" style="background:#f59e0b;width:7px;height:7px;border-radius:50%;margin:0 auto"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">GenAI Jan26 — Nomina MX Saving<small>Core Banking · GenAI · 35 users · GoLive divergente no sistema</small></div>
+        <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
+        <div class="opp-fte-val">2.0</div>
+        <div class="opp-stage" style="color:#b45309;font-size:0.6rem">⚠️ Verificar</div>
+        <div class="opp-priority-tag" style="color:#b45309;font-family:var(--mono);font-size:0.58rem">⚠️ Verificar</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+      <div class="opp-card priority-alta" data-priority="alta" data-type="genai" data-client="santander" style="background:#fffbeb;border-left:3px solid #f59e0b">
+        <div class="opp-dot" style="background:#f59e0b;width:7px;height:7px;border-radius:50%;margin:0 auto"></div>
+        <div class="opp-client-badge client-santander">SANTANDER</div>
+        <div class="opp-tool-name">Chatbot consulta estatus nómina digital<small>Core Banking · VBA/PL-SQL/Telegram · GoLive divergente no sistema</small></div>
+        <div><span class="opp-type-chip chip-genai">Gen AI / IA</span></div>
+        <div class="opp-fte-val">22.5</div>
+        <div class="opp-stage" style="color:#b45309;font-size:0.6rem">⚠️ Verificar</div>
+        <div class="opp-priority-tag" style="color:#b45309;font-family:var(--mono);font-size:0.58rem">⚠️ Verificar</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+      <div class="opp-group-sep"><span class="opp-group-label" style="color:var(--muted)">🔵 BBVA Bancomer — 2 confirmados FY26 · 1 verificar (BBVA Colombia)</span></div>
 
-      <div class="opp-card priority-media" data-priority="media" data-type="automation">
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="bbva">
         <div class="opp-dot dot-media"></div>
         <div class="opp-client-badge client-bbva">BBVA</div>
-        <div class="opp-tool-name">BBVA — Project Mar26<small>Core Banking · Capacity Utilization</small></div>
+        <div class="opp-tool-name">BBVA — Project Mar26<small>Core Banking · Stage3: Abr/26</small></div>
         <div><span class="opp-type-chip chip-auto">Automation</span></div>
         <div class="opp-fte-val">3.0</div>
-        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-stage stage-deployed">✅ Abr/26</div>
         <div class="opp-priority-tag tag-media">🟡 Média</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
-
-      <div class="opp-card priority-media" data-priority="media" data-type="automation">
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="bbva">
         <div class="opp-dot dot-media"></div>
         <div class="opp-client-badge client-bbva">BBVA</div>
-        <div class="opp-tool-name">BBVA — Project 26<small>Core Banking · Capacity Utilization</small></div>
+        <div class="opp-tool-name">BBVA — Project 26<small>Core Banking · Stage3: Abr/26</small></div>
         <div><span class="opp-type-chip chip-auto">Automation</span></div>
         <div class="opp-fte-val">3.0</div>
-        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-stage stage-deployed">✅ Abr/26</div>
         <div class="opp-priority-tag tag-media">🟡 Média</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="bbva" style="background:#fffbeb;border-left:3px solid #f59e0b">
+        <div class="opp-dot" style="background:#f59e0b;width:7px;height:7px;border-radius:50%;margin:0 auto"></div>
+        <div class="opp-client-badge client-bbva">BBVA</div>
+        <div class="opp-tool-name">BBVA Colombia<small>Stage3: Mar/26 · Verificar se é México ou Colombia</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
+        <div class="opp-fte-val">2.0</div>
+        <div class="opp-stage" style="color:#b45309;font-size:0.6rem">⚠️ Verificar</div>
+        <div class="opp-priority-tag" style="color:#b45309;font-family:var(--mono);font-size:0.58rem">⚠️ Verificar</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+      <div class="opp-group-sep"><span class="opp-group-label" style="color:var(--muted)">⚙️ Whirlpool MEX — 9 confirmados FY26</span></div>
 
-      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="whirlpool">
         <div class="opp-dot dot-media"></div>
         <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
-        <div class="opp-tool-name">Pipeline FY26 — Whirlpool Q3 RPA<small>Invoice to Pay (AP) · Selenium / RPA</small></div>
+        <div class="opp-tool-name">Pipeline FY26 — Whirlpool Q2 RPA (Pipefy)<small>Invoice to Pay · Pipefy · Stage3: Mar/26</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
+        <div class="opp-fte-val">1.0</div>
+        <div class="opp-stage stage-deployed">✅ Mar/26</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+      <div class="opp-card priority-media" data-priority="media" data-type="pipeline" data-client="whirlpool">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
+        <div class="opp-tool-name">Pipeline FY26 — Whirlpool Q3 RPA<small>Invoice to Pay · Automation Anywhere</small></div>
         <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
         <div class="opp-fte-val">1.0</div>
         <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
         <div class="opp-priority-tag tag-media">🟡 Média</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
-
-      <div class="opp-card priority-media" data-priority="media" data-type="automation">
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="whirlpool">
         <div class="opp-dot dot-media"></div>
-        <div class="opp-client-badge client-santander">SANTANDER</div>
-        <div class="opp-tool-name">Cálculo de bonos y comisiones<small>Core Banking · VBA / PL-SQL</small></div>
+        <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
+        <div class="opp-tool-name">Payment Complement — Accounts Payable<small>Invoice to Pay · Combination · Stage3: Mar/26</small></div>
         <div><span class="opp-type-chip chip-auto">Automation</span></div>
-        <div class="opp-fte-val">2.0</div>
-        <div class="opp-stage stage-deployed">✅ Deployed</div>
+        <div class="opp-fte-val">0.1</div>
+        <div class="opp-stage stage-deployed">✅ Mar/26</div>
         <div class="opp-priority-tag tag-media">🟡 Média</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
-
-      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="whirlpool">
         <div class="opp-dot dot-media"></div>
         <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
-        <div class="opp-tool-name">Payment Complement — Accounts Payable<small>Invoice to Pay · Automation Anywhere</small></div>
-        <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
+        <div class="opp-tool-name">Reconciliation of Bank Statements<small>Record to Report · Combination/VBA/Python · Stage3: Mar/26</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
         <div class="opp-fte-val">0.1</div>
-        <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
+        <div class="opp-stage stage-deployed">✅ Mar/26</div>
         <div class="opp-priority-tag tag-media">🟡 Média</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
-
-      <div class="opp-card priority-media" data-priority="media" data-type="pipeline">
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="whirlpool">
         <div class="opp-dot dot-media"></div>
         <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
-        <div class="opp-tool-name">Reconciliation of Bank Statements<small>Record to Report · Combination / VBA / Python</small></div>
-        <div><span class="opp-type-chip chip-pipeline">Pipeline</span></div>
+        <div class="opp-tool-name">IPE<small>Invoice to Pay · Combination · Stage3: Mar/26</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
         <div class="opp-fte-val">0.1</div>
-        <div class="opp-stage stage-pipeline">🔵 Pipeline</div>
+        <div class="opp-stage stage-deployed">✅ Mar/26</div>
         <div class="opp-priority-tag tag-media">🟡 Média</div>
         <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
       </div>
+      <div class="opp-card priority-media" data-priority="media" data-type="automation" data-client="whirlpool">
+        <div class="opp-dot dot-media"></div>
+        <div class="opp-client-badge client-whirlpool">WHIRLPOOL</div>
+        <div class="opp-tool-name">Report Extraction FBL5N<small>Record to Report · Combination · Stage3: Mar/26</small></div>
+        <div><span class="opp-type-chip chip-auto">Automation</span></div>
+        <div class="opp-fte-val">0.1</div>
+        <div class="opp-stage stage-deployed">✅ Mar/26</div>
+        <div class="opp-priority-tag tag-media">🟡 Média</div>
+        <a href="https://weinnovate-operations.accenture.com/UserProfile" target="_blank" class="opp-submit-btn"><svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12,5 19,12 12,19"/></svg>Submeter</a>
+      </div>
+      <div class="opp-group-sep"><span class="opp-group-label" style="color:var(--muted)">🟤 BAT MEX — sem projetos mapeados no DigiPortal</span></div>
 
+      <div style="display:grid;grid-template-columns:14px 88px 1fr;gap:0.4rem;align-items:center;padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);background:#fafafa" data-client="bat">
+        <div></div>
+        <div class="opp-client-badge client-bat">BAT</div>
+        <div style="font-size:0.75rem;color:var(--muted);font-family:var(--mono);font-style:italic;padding-left:0.4rem">Nenhum projeto encontrado no DigiPortal para México. Oportunidade: mapear iniciativas do deal manualmente.</div>
+      </div>
+      <div class="opp-group-sep"><span class="opp-group-label" style="color:var(--muted)">🟣 Citibanamex — sem projetos mapeados no DigiPortal</span></div>
+
+      <div style="display:grid;grid-template-columns:14px 88px 1fr;gap:0.4rem;align-items:center;padding:0.6rem 0.8rem;border-bottom:1px solid var(--border);background:#fafafa" data-client="citi">
+        <div></div>
+        <div class="opp-client-badge client-citi">CITI</div>
+        <div style="font-size:0.75rem;color:var(--muted);font-family:var(--mono);font-style:italic;padding-left:0.4rem">1 projeto em Stage 4 Completed (benefits realized). Nenhum elegível ativo encontrado. Sugestão: verificar iniciativas em andamento no deal.</div>
+      </div>
     </div><!-- /opp-grid -->
   </div><!-- /opp-section -->
 
@@ -1317,6 +1355,7 @@
   .client-bbva      { background: #004B9B; color: white; }
   .client-whirlpool { background: #1B3A6B; color: white; }
   .client-citi      { background: #003087; color: white; }
+  .client-bat       { background: #1F3A1F; color: white; }
   .opp-tool-name {
     font-size: 0.78rem;
     font-weight: 600;
@@ -1646,6 +1685,7 @@
   .client-bbva      { background: #004B9B; color: white; }
   .client-whirlpool { background: #003087; color: white; }
   .client-citi      { background: #003087; color: white; }
+  .client-bat       { background: #1F3A1F; color: white; }
 
   /* TOOL NAME CELL */
   .opp-tool-name {
@@ -1790,6 +1830,14 @@
       el.style.height = (val === 0 ? 2 : Math.max(3, (val / refVal) * barHeight)) + 'px';
     });
   }, 300);
+
+  function filterClient(client, btn) {
+    document.querySelectorAll('.fpill').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.opp-card, [data-client]').forEach(card => {
+      card.classList.toggle('hidden', card.dataset.client !== client);
+    });
+  }
 
   function filterOpps(type, btn) {
     document.querySelectorAll('.fpill').forEach(p => p.classList.remove('active'));
